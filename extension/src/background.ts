@@ -32,11 +32,21 @@ async function generateValues(
     }),
   });
 
+  const payload = (await response.json().catch(() => ({}))) as
+    | GenerateResponse
+    | { error?: string; message?: string };
+
   if (!response.ok) {
-    throw new Error(`Server responded with ${response.status}`);
+    const detail =
+      'message' in payload && payload.message
+        ? payload.message
+        : 'error' in payload && payload.error
+          ? payload.error
+          : `Server responded with ${response.status}`;
+    throw new Error(detail);
   }
 
-  return (await response.json()) as GenerateResponse;
+  return payload as GenerateResponse;
 }
 
 async function fillActiveTab(): Promise<ExtensionResponse> {

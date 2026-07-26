@@ -6,10 +6,15 @@
   "outputDirectory": "web",
   "cleanUrls": true,
   "functions": {
-    "api/**/*.ts": {
+    "api/generate.ts": {
       "memory": 1024,
       "maxDuration": 15,
-      "includeFiles": "server/src/**"
+      "includeFiles": "{server/src/**,node_modules/@faker-js/**}"
+    },
+    "api/profile.ts": {
+      "memory": 1024,
+      "maxDuration": 10,
+      "includeFiles": "node_modules/@faker-js/**"
     }
   },
   "headers": [

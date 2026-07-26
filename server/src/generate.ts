@@ -1,13 +1,8 @@
 import type { Faker } from '@faker-js/faker';
+// Keep locale imports minimal — same paths that already work on Vercel (/api/profile).
 import { faker as fakerEN_US } from '@faker-js/faker/locale/en_US';
 import { faker as fakerEN_NG } from '@faker-js/faker/locale/en_NG';
-import { faker as fakerYO_NG } from '@faker-js/faker/locale/yo_NG';
 import { faker as fakerEN_GB } from '@faker-js/faker/locale/en_GB';
-import { faker as fakerEN_GH } from '@faker-js/faker/locale/en_GH';
-import { faker as fakerEN_ZA } from '@faker-js/faker/locale/en_ZA';
-import { faker as fakerEN_IN } from '@faker-js/faker/locale/en_IN';
-import { faker as fakerEN_CA } from '@faker-js/faker/locale/en_CA';
-import { faker as fakerEN_AU } from '@faker-js/faker/locale/en_AU';
 
 export interface FormFieldDescriptor {
   name: string;
@@ -32,18 +27,6 @@ export interface GenerateOptions {
   emailDomains?: string;
 }
 
-const LOCALE_FAKERS: Record<string, Faker> = {
-  'en-NG': fakerEN_NG,
-  'yo-NG': fakerYO_NG,
-  'en-US': fakerEN_US,
-  'en-GB': fakerEN_GB,
-  'en-GH': fakerEN_GH,
-  'en-ZA': fakerEN_ZA,
-  'en-IN': fakerEN_IN,
-  'en-CA': fakerEN_CA,
-  'en-AU': fakerEN_AU,
-};
-
 const LOCALE_COUNTRY: Record<string, string> = {
   'en-NG': 'Nigeria',
   'yo-NG': 'Nigeria',
@@ -59,12 +42,17 @@ const LOCALE_COUNTRY: Record<string, string> = {
 const DEFAULT_EMAIL_DOMAINS = ['gmail.com', 'yahoo.com', 'outlook.com'];
 
 function resolveLocale(locale?: string): string {
-  if (locale && LOCALE_FAKERS[locale]) return locale;
+  if (locale && locale in LOCALE_COUNTRY) return locale;
   return 'en-NG';
 }
 
+/** Person/name faker for a locale (Nigerian locales share en_NG data). */
 function getFaker(locale: string): Faker {
-  return LOCALE_FAKERS[locale] ?? fakerEN_US;
+  if (locale === 'en-NG' || locale === 'yo-NG' || locale === 'en-GH') {
+    return fakerEN_NG;
+  }
+  if (locale === 'en-GB') return fakerEN_GB;
+  return fakerEN_US;
 }
 
 function parseEmailDomains(raw?: string): string[] {
