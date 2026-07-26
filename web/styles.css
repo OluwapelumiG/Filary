@@ -191,6 +191,27 @@ a {
   color: var(--muted);
 }
 
+.section-lede a {
+  color: var(--accent-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.steps code,
+.section-lede code {
+  font-family: "SF Mono", "Menlo", "Consolas", monospace;
+  font-size: 0.88em;
+  background: rgba(15, 118, 110, 0.1);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.steps a {
+  color: var(--accent-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .lede {
   animation: rise 0.85s ease 0.16s both;
 }

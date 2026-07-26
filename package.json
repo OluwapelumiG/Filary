@@ -11,8 +11,10 @@
     "server": "bun run --cwd server start",
     "dev": "bun run --cwd extension dev",
     "build": "bun run --cwd extension build",
+    "pack": "bun scripts/pack-extension.mjs",
+    "release": "bun run build && bun run pack",
     "web": "bunx --bun serve web -l 3000",
-    "build:web": "echo 'web/ is static — nothing to build'"
+    "build:web": "bun run release"
   },
   "dependencies": {
     "@faker-js/faker": "^9.9.0",

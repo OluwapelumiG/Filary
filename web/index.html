@@ -34,9 +34,10 @@
         <a
           id="nav-chrome"
           class="nav-chrome"
-          href="#add-to-chrome"
+          href="/filary-extension.zip"
+          download="filary-extension.zip"
           data-chrome-store
-          >Add to Chrome</a
+          >Download</a
         >
       </nav>
     </header>
@@ -55,13 +56,14 @@
             <a
               id="add-to-chrome"
               class="cta primary"
-              href="#add-to-chrome"
+              href="/filary-extension.zip"
+              download="filary-extension.zip"
               data-chrome-store
             >
-              <span class="cta-label">Add to Chrome</span>
-              <span class="cta-sub" data-chrome-status>Link coming soon</span>
+              <span class="cta-label">Download extension</span>
+              <span class="cta-sub" data-chrome-status>Zip · Load unpacked</span>
             </a>
-            <a class="cta ghost" href="#how">See how it works</a>
+            <a class="cta ghost" href="#install">Install steps</a>
           </div>
         </div>
 
@@ -104,6 +106,45 @@
             </div>
           </div>
         </div>
+      </section>
+
+      <section id="install" class="how reveal">
+        <h2>Install from the zip</h2>
+        <p class="section-lede">
+          Chrome can’t one-click install from a website yet, so Filary ships as
+          a zip. Unzip it, then load the folder in Developer mode — takes under
+          a minute.
+        </p>
+        <ol class="steps">
+          <li>
+            <span class="step-num">01</span>
+            <span class="step-title">Download</span>
+            <span class="step-body"
+              >Get
+              <a href="/filary-extension.zip" download="filary-extension.zip"
+                >filary-extension.zip</a
+              >
+              and unzip it. You should see a <code>filary</code> folder with
+              <code>manifest.json</code> inside.</span
+            >
+          </li>
+          <li>
+            <span class="step-num">02</span>
+            <span class="step-title">Open extensions</span>
+            <span class="step-body"
+              >Go to <code>chrome://extensions</code> and turn on
+              <strong>Developer mode</strong> (top right).</span
+            >
+          </li>
+          <li>
+            <span class="step-num">03</span>
+            <span class="step-title">Load unpacked</span>
+            <span class="step-body"
+              >Click <strong>Load unpacked</strong> and select the unzipped
+              <code>filary</code> folder. Pin Filary from the puzzle icon.</span
+            >
+          </li>
+        </ol>
       </section>
 
       <section id="how" class="how reveal">

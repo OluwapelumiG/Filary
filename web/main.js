@@ -1,5 +1,9 @@
+/** Packaged extension for manual install (Load unpacked). */
+const EXTENSION_ZIP_URL = '/filary-extension.zip';
+
 /**
- * Paste your Chrome Web Store URL when the listing is live.
+ * Optional: when the Chrome Web Store listing is live, set this and
+ * the primary CTA can switch to the store. Until then we ship the zip.
  * Example: 'https://chromewebstore.google.com/detail/filary/xxxxxxxx'
  */
 const CHROME_STORE_URL = '';
@@ -58,25 +62,36 @@ const localeSets = [
 
 function wireChromeLinks() {
   const links = document.querySelectorAll('[data-chrome-store]');
-  const ready = Boolean(CHROME_STORE_URL?.trim());
+  const storeUrl = CHROME_STORE_URL?.trim();
 
   for (const link of links) {
-    if (ready) {
-      link.href = CHROME_STORE_URL.trim();
+    link.classList.remove('is-soon');
+
+    if (storeUrl) {
+      link.href = storeUrl;
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
-      link.classList.remove('is-soon');
+      link.removeAttribute('download');
       const status = link.querySelector('[data-chrome-status]');
       if (status) status.textContent = 'Free · Chrome Web Store';
-    } else {
-      link.href = '#add-to-chrome';
-      link.classList.add('is-soon');
-      link.addEventListener('click', (event) => {
-        event.preventDefault();
-      });
-      const status = link.querySelector('[data-chrome-status]');
-      if (status) status.textContent = 'Link coming soon';
+      continue;
     }
+
+    // Manual install: download zip → Load unpacked
+    link.href = EXTENSION_ZIP_URL;
+    link.setAttribute('download', 'filary-extension.zip');
+    link.removeAttribute('target');
+    const status = link.querySelector('[data-chrome-status]');
+    if (status) status.textContent = 'Zip · Load unpacked';
+    const label = link.querySelector('.cta-label');
+    if (label && link.classList.contains('cta')) {
+      label.textContent = 'Download extension';
+    }
+  }
+
+  const nav = document.getElementById('nav-chrome');
+  if (nav && !storeUrl) {
+    nav.textContent = 'Download';
   }
 }
 

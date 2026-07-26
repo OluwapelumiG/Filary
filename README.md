@@ -51,9 +51,16 @@ curl -X POST https://filary-server.vercel.app/api/generate \
   -d '{"fields":[{"name":"firstName","type":"text"},{"name":"country","type":"text"}],"locale":"en-NG"}'
 ```
 
-### Chrome Web Store button on the landing page
+### Extension zip on the landing page
 
-In [`web/main.js`](web/main.js):
+Vercel build runs `bun run release`, which packs `extension/dist` into
+`web/filary-extension.zip`. The site’s **Download extension** button points to
+`/filary-extension.zip`.
+
+Users: unzip → `chrome://extensions` → Developer mode → **Load unpacked** →
+select the `filary` folder.
+
+Later, for the Chrome Web Store, set in [`web/main.js`](web/main.js):
 
 ```js
 const CHROME_STORE_URL = 'https://chromewebstore.google.com/detail/filary/…';
