@@ -2,7 +2,21 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import {
   generateValues,
   type FormFieldDescriptor,
-} from '../server/src/generate';
+} from './lib/generate';
+
+function readBody(req: VercelRequest): Record<string, unknown> {
+  const raw = req.body;
+  if (raw == null) return {};
+  if (typeof raw === 'string') {
+    try {
+      return JSON.parse(raw) as Record<string, unknown>;
+    } catch {
+      return {};
+    }
+  }
+  if (typeof raw === 'object') return raw as Record<string, unknown>;
+  return {};
+}
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -20,7 +34,8 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const fields = (req.body?.fields ?? []) as FormFieldDescriptor[];
+    const body = readBody(req);
+    const fields = (body.fields ?? []) as FormFieldDescriptor[];
     if (!Array.isArray(fields)) {
       res.status(400).json({ error: 'body.fields must be an array' });
       return;
@@ -28,11 +43,9 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
 
     res.status(200).json(
       generateValues(fields, {
-        locale: typeof req.body?.locale === 'string' ? req.body.locale : undefined,
+        locale: typeof body.locale === 'string' ? body.locale : undefined,
         emailDomains:
-          typeof req.body?.emailDomains === 'string'
-            ? req.body.emailDomains
-            : undefined,
+          typeof body.emailDomains === 'string' ? body.emailDomains : undefined,
       }),
     );
   } catch (error) {

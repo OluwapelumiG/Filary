@@ -7,12 +7,10 @@
   "cleanUrls": true,
   "functions": {
     "api/generate.ts": {
-      "memory": 1024,
       "maxDuration": 15,
-      "includeFiles": "{server/src/**,node_modules/@faker-js/**}"
+      "includeFiles": "node_modules/@faker-js/**"
     },
     "api/profile.ts": {
-      "memory": 1024,
       "maxDuration": 10,
       "includeFiles": "node_modules/@faker-js/**"
     }
