@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Filary</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Filary</h1>
+      <p class="tagline">Fill the focused form via TypeServe</p>
+    </header>
+
+    <section class="status" aria-live="polite">
+      <span id="status-dot" class="dot unknown"></span>
+      <span id="status-text">Checking server…</span>
+    </section>
+
+    <p id="shortcut-line" class="meta">Shortcut: …</p>
+
+    <div class="actions">
+      <button id="fill-btn" type="button" class="primary">Fill focused form</button>
+      <button id="options-btn" type="button" class="secondary">Settings</button>
+    </div>
+
+    <p id="result" class="result" hidden></p>
+
+    <p class="hint">
+      Click a field inside a <code>&lt;form&gt;</code>, then fill. Start the server with
+      <code>bun run server</code>.
+    </p>
+
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

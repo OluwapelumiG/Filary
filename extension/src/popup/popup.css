@@ -1,0 +1,144 @@
+:root {
+  --bg: #f6f3ee;
+  --ink: #1c1917;
+  --muted: #78716c;
+  --accent: #0f766e;
+  --accent-ink: #f0fdfa;
+  --border: #d6d3d1;
+  --danger: #b91c1c;
+  --ok: #15803d;
+  --warn: #a16207;
+  --font: "Segoe UI", "Helvetica Neue", sans-serif;
+  --mono: "SF Mono", "Menlo", "Consolas", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  width: 280px;
+  padding: 16px;
+  font-family: var(--font);
+  color: var(--ink);
+  background:
+    radial-gradient(120% 80% at 0% 0%, #ccfbf1 0%, transparent 55%),
+    radial-gradient(100% 70% at 100% 100%, #fde68a 0%, transparent 50%),
+    var(--bg);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+}
+
+.tagline {
+  margin: 4px 0 0;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  font-size: 0.85rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+  flex-shrink: 0;
+}
+
+.dot.ok {
+  background: var(--ok);
+}
+
+.dot.bad {
+  background: var(--danger);
+}
+
+.dot.unknown {
+  background: var(--warn);
+}
+
+.meta {
+  margin: 8px 0 0;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+button {
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 9px 12px;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+button.primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+button.primary:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+
+button.secondary {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--ink);
+}
+
+button.secondary:hover {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.result {
+  margin: 12px 0 0;
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.result.ok {
+  color: var(--ok);
+}
+
+.result.bad {
+  color: var(--danger);
+}
+
+.hint {
+  margin: 14px 0 0;
+  font-size: 0.7rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  background: rgba(255, 255, 255, 0.65);
+  padding: 1px 4px;
+  border-radius: 4px;
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Filary Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="brand">Filary</p>
+        <h1>Settings</h1>
+        <p class="lede">
+          Configure the local server, keyboard shortcut, and fill behavior.
+          Filary fills the form that owns the focused input.
+        </p>
+      </header>
+
+      <form id="settings-form">
+        <section>
+          <h2>Server</h2>
+          <label class="field">
+            <span>Server base URL</span>
+            <input id="server-url" name="serverUrl" type="url" required />
+          </label>
+          <div class="row">
+            <button id="test-btn" type="button" class="secondary">Test connection</button>
+            <span id="test-result" class="inline-status" aria-live="polite"></span>
+          </div>
+          <p class="help">
+            Default is <code>http://localhost:7002/api</code>. Start it with
+            <code>bun run server</code>. Fill uses <code>POST /generate</code>.
+          </p>
+        </section>
+
+        <section>
+          <h2>Keyboard shortcut</h2>
+          <p class="shortcut-display">Current: <strong id="shortcut-value">…</strong></p>
+          <button id="shortcut-btn" type="button" class="secondary">Change shortcut in Chrome</button>
+          <p class="help">
+            Both shortcuts are registered (⌘⇧Y / Ctrl+Shift+Y and ⌥⇧F / Alt+Shift+F).
+            Change them on Chrome’s Extensions shortcuts page.
+          </p>
+        </section>
+
+        <section>
+          <h2>Fill behavior</h2>
+          <label class="field">
+            <span>Fill mode</span>
+            <select id="fill-mode" name="fillMode">
+              <option value="empty">Empty fields only</option>
+              <option value="overwrite">Overwrite matched fields</option>
+            </select>
+          </label>
+          <label class="check">
+            <input id="include-passwords" type="checkbox" />
+            <span>Include password fields</span>
+          </label>
+          <label id="default-password-field" class="field nested" hidden>
+            <span>Default password</span>
+            <input
+              id="default-password"
+              name="defaultPassword"
+              type="text"
+              autocomplete="off"
+              placeholder="Leave empty to generate a random password"
+            />
+          </label>
+          <label class="field">
+            <span>Locale</span>
+            <select id="locale" name="locale">
+              <option value="en-NG">Nigeria (English)</option>
+              <option value="yo-NG">Nigeria (Yoruba)</option>
+              <option value="en-US">United States</option>
+              <option value="en-GB">United Kingdom</option>
+              <option value="en-GH">Ghana</option>
+              <option value="en-ZA">South Africa</option>
+              <option value="en-IN">India</option>
+              <option value="en-CA">Canada</option>
+              <option value="en-AU">Australia</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Email domains</span>
+            <input
+              id="email-domains"
+              name="emailDomains"
+              type="text"
+              placeholder="gmail.com, yahoo.com, outlook.com"
+            />
+          </label>
+          <p class="help">
+            Locale drives names, phone, city, and state. Country is fixed for known
+            locales (e.g. Nigeria). Emails use a random domain from your list.
+            Sent to <code>POST /generate</code> on each fill.
+          </p>
+        </section>
+
+        <div class="footer-actions">
+          <button type="submit" class="primary">Save settings</button>
+          <span id="save-status" class="inline-status" aria-live="polite"></span>
+        </div>
+      </form>
+    </main>
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

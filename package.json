@@ -1,0 +1,19 @@
+{
+  "name": "filary",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Chrome extension that fills forms with realistic data from a local TypeServe server",
+  "workspaces": [
+    "server",
+    "extension"
+  ],
+  "scripts": {
+    "server": "bun run --cwd server start",
+    "dev": "bun run --cwd extension dev",
+    "build": "bun run --cwd extension build"
+  },
+  "packageManager": "bun@1.2.23",
+  "engines": {
+    "bun": ">=1.1.0"
+  }
+}
