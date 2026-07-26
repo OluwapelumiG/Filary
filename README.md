@@ -41,11 +41,12 @@ export const HOSTED_API_BASE = 'https://YOUR_DEPLOYMENT.vercel.app/api';
 
 6. `bun run build`, reload the unpacked extension (or ship the new build)
 
-Smoke-check the hosted API:
+Smoke-check the hosted API (redeploy after pulling these API route fixes):
 
 ```bash
-curl https://YOUR_DEPLOYMENT.vercel.app/api/health
-curl -X POST https://YOUR_DEPLOYMENT.vercel.app/api/generate \
+curl https://filary-server.vercel.app/api
+curl https://filary-server.vercel.app/api/health
+curl -X POST https://filary-server.vercel.app/api/generate \
   -H 'Content-Type: application/json' \
   -d '{"fields":[{"name":"firstName","type":"text"},{"name":"country","type":"text"}],"locale":"en-NG"}'
 ```

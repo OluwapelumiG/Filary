@@ -6,19 +6,10 @@
   "outputDirectory": "web",
   "cleanUrls": true,
   "functions": {
-    "api/[...path].ts": {
+    "api/**/*.ts": {
       "memory": 1024,
       "maxDuration": 15,
-      "includeFiles": "server/**"
+      "includeFiles": "server/src/**"
     }
-  },
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
-      ]
-    }
-  ]
+  }
 }
