@@ -54,8 +54,9 @@ curl -X POST https://filary-server.vercel.app/api/generate \
 ### Extension zip on the landing page
 
 Vercel build runs `bun run release`, which packs `extension/dist` into
-`web/filary-extension.zip`. The site’s **Download extension** button points to
-`/filary-extension.zip`.
+`web/filary-extension.zip`. **Download** links go to [`/install?download=1`](web/install.html),
+which starts the zip download, bumps the download counter (`/api/downloads`),
+and shows a visual Load unpacked guide.
 
 Users: unzip → `chrome://extensions` → Developer mode → **Load unpacked** →
 select the `filary` folder.

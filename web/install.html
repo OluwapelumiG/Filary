@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Install Filary — Chrome extension</title>
+    <meta
+      name="description"
+      content="Download Filary and load it in Chrome in under a minute."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  </head>
+  <body class="page-install">
+    <div class="atmosphere" aria-hidden="true">
+      <div class="glow glow-a"></div>
+      <div class="glow glow-b"></div>
+      <div class="grid-wash"></div>
+    </div>
+
+    <header class="top">
+      <a class="mark" href="/" aria-label="Filary home">Filary</a>
+      <nav>
+        <a href="/#how">How it works</a>
+        <a class="nav-chrome" href="/install?download=1" data-download-cta
+          >Download again</a
+        >
+      </nav>
+    </header>
+
+    <main class="install-main">
+      <section class="install-hero">
+        <p class="install-kicker">You’re almost there</p>
+        <h1>Install Filary in Chrome</h1>
+        <p class="lede install-lede">
+          Your download should start automatically. Unzip the file, then follow
+          the three steps below — Developer mode, Load unpacked, done.
+        </p>
+
+        <div class="download-bar">
+          <div class="download-bar-copy">
+            <p class="download-status" data-download-status>
+              Preparing filary-extension.zip…
+            </p>
+            <p class="download-count">
+              <span data-download-count>—</span> downloads
+            </p>
+          </div>
+          <a
+            class="cta primary"
+            href="/filary-extension.zip"
+            download="filary-extension.zip"
+            data-manual-download
+          >
+            <span class="cta-label">Download zip</span>
+            <span class="cta-sub">If it didn’t start</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="install-guide" aria-label="Installation steps">
+        <article class="guide-step">
+          <div class="guide-copy">
+            <span class="step-num">01</span>
+            <h2>Unzip the download</h2>
+            <p>
+              Open <code>filary-extension.zip</code>. You should get a
+              <code>filary</code> folder that contains
+              <code>manifest.json</code>. Keep that folder — Chrome loads the
+              folder, not the zip.
+            </p>
+          </div>
+          <div class="guide-visual" aria-hidden="true">
+            <div class="mock-window">
+              <div class="mock-titlebar">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="mock-body mock-files">
+                <div class="mock-file is-zip">filary-extension.zip</div>
+                <div class="mock-arrow">↓</div>
+                <div class="mock-folder">
+                  <span class="mock-folder-icon"></span>
+                  <div>
+                    <strong>filary</strong>
+                    <small>manifest.json · background.js · …</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-copy">
+            <span class="step-num">02</span>
+            <h2>Open Extensions</h2>
+            <p>
+              In Chrome, go to <code>chrome://extensions</code>. Flip
+              <strong>Developer mode</strong> on — it’s the toggle in the top
+              right.
+            </p>
+          </div>
+          <div class="guide-visual" aria-hidden="true">
+            <div class="mock-window">
+              <div class="mock-titlebar">
+                <span></span><span></span><span></span>
+                <em>chrome://extensions</em>
+              </div>
+              <div class="mock-body mock-extensions">
+                <div class="mock-ext-head">
+                  <strong>Extensions</strong>
+                  <label class="mock-toggle">
+                    <span>Developer mode</span>
+                    <i class="is-on"></i>
+                  </label>
+                </div>
+                <div class="mock-ext-actions">
+                  <span class="is-active">Load unpacked</span>
+                  <span>Pack extension</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-copy">
+            <span class="step-num">03</span>
+            <h2>Load unpacked</h2>
+            <p>
+              Click <strong>Load unpacked</strong>, select the unzipped
+              <code>filary</code> folder, and confirm. Pin Filary from the puzzle
+              icon in the toolbar — then focus a form field and hit
+              <kbd>⌘</kbd><kbd>⇧</kbd><kbd>Y</kbd>.
+            </p>
+          </div>
+          <div class="guide-visual" aria-hidden="true">
+            <div class="mock-window">
+              <div class="mock-titlebar">
+                <span></span><span></span><span></span>
+                <em>Select the filary folder</em>
+              </div>
+              <div class="mock-body mock-picker">
+                <div class="mock-picker-row is-selected">
+                  <span class="mock-folder-icon"></span>
+                  filary
+                </div>
+                <div class="mock-picker-row">Documents</div>
+                <div class="mock-picker-row">Downloads</div>
+                <div class="mock-picker-foot">
+                  <span class="mock-btn ghost">Cancel</span>
+                  <span class="mock-btn solid">Select</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="install-next">
+        <h2>You’re ready</h2>
+        <p class="section-lede">
+          Open any page with a form, focus a field, and trigger Filary. The
+          hosted API is already configured — no local server required.
+        </p>
+        <div class="cta-row">
+          <a class="cta primary" href="/">
+            <span class="cta-label">Back to Filary</span>
+            <span class="cta-sub">See how it works</span>
+          </a>
+          <a
+            class="cta ghost"
+            href="/filary-extension.zip"
+            download="filary-extension.zip"
+            data-manual-download
+            >Download zip again</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="foot-main">
+        <p class="brand-foot">Filary</p>
+        <p class="muted">Chrome extension · Load unpacked · Hosted API</p>
+      </div>
+      <div class="foot-links">
+        <a href="/">Home</a>
+        <a href="/#how">How it works</a>
+        <a href="/install?download=1" data-download-cta>Download</a>
+      </div>
+    </footer>
+
+    <script type="module" src="./install.js"></script>
+  </body>
+</html>

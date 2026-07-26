@@ -1,5 +1,5 @@
-/** Packaged extension for manual install (Load unpacked). */
-const EXTENSION_ZIP_URL = '/filary-extension.zip';
+/** Install page that triggers the zip download + shows steps. */
+const INSTALL_URL = '/install?download=1';
 
 /**
  * Optional: when the Chrome Web Store listing is live, set this and
@@ -77,12 +77,12 @@ function wireChromeLinks() {
       continue;
     }
 
-    // Manual install: download zip → Load unpacked
-    link.href = EXTENSION_ZIP_URL;
-    link.setAttribute('download', 'filary-extension.zip');
+    // Manual install: go to install page (auto-downloads zip)
+    link.href = INSTALL_URL;
+    link.removeAttribute('download');
     link.removeAttribute('target');
     const status = link.querySelector('[data-chrome-status]');
-    if (status) status.textContent = 'Zip · Load unpacked';
+    if (status) status.textContent = 'Zip · Install guide';
     const label = link.querySelector('.cta-label');
     if (label && link.classList.contains('cta')) {
       label.textContent = 'Download extension';
@@ -92,6 +92,21 @@ function wireChromeLinks() {
   const nav = document.getElementById('nav-chrome');
   if (nav && !storeUrl) {
     nav.textContent = 'Download';
+  }
+}
+
+async function loadDownloadCount() {
+  const nodes = document.querySelectorAll('[data-download-count]');
+  if (!nodes.length) return;
+  try {
+    const res = await fetch('/api/downloads');
+    if (!res.ok) return;
+    const data = await res.json();
+    if (typeof data.count !== 'number') return;
+    const text = new Intl.NumberFormat('en').format(data.count);
+    for (const node of nodes) node.textContent = text;
+  } catch {
+    // Counter is optional on local static preview
   }
 }
 
@@ -185,6 +200,7 @@ function observeReveals() {
 
 wireChromeLinks();
 observeReveals();
+void loadDownloadCount();
 
 if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   void cycleFields();

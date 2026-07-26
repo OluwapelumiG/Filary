@@ -28,14 +28,13 @@
     <header class="top">
       <a class="mark" href="/" aria-label="Filary home">Filary</a>
       <nav>
+        <a href="#install">Install</a>
         <a href="#how">How it works</a>
         <a href="#realism">Realism</a>
-        <a href="#control">Control</a>
         <a
           id="nav-chrome"
           class="nav-chrome"
-          href="/filary-extension.zip"
-          download="filary-extension.zip"
+          href="/install?download=1"
           data-chrome-store
           >Download</a
         >
@@ -56,15 +55,18 @@
             <a
               id="add-to-chrome"
               class="cta primary"
-              href="/filary-extension.zip"
-              download="filary-extension.zip"
+              href="/install?download=1"
               data-chrome-store
             >
               <span class="cta-label">Download extension</span>
-              <span class="cta-sub" data-chrome-status>Zip · Load unpacked</span>
+              <span class="cta-sub" data-chrome-status>Zip · Install guide</span>
             </a>
-            <a class="cta ghost" href="#install">Install steps</a>
+            <a class="cta ghost" href="#install">See install steps</a>
           </div>
+          <p class="hero-meta">
+            <span data-download-count>—</span> downloads · under a minute to
+            install
+          </p>
         </div>
 
         <div class="hero-visual" aria-hidden="true">
@@ -108,41 +110,46 @@
         </div>
       </section>
 
-      <section id="install" class="how reveal">
-        <h2>Install from the zip</h2>
-        <p class="section-lede">
-          Chrome can’t one-click install from a website yet, so Filary ships as
-          a zip. Unzip it, then load the folder in Developer mode — takes under
-          a minute.
-        </p>
-        <ol class="steps">
+      <section id="install" class="install-preview reveal">
+        <div class="install-preview-copy">
+          <h2>Install from a zip in three moves</h2>
+          <p class="section-lede">
+            Chrome can’t one-click install from a website yet, so Filary ships as
+            a zip. Download it, and we’ll walk you through Load unpacked.
+          </p>
+          <a class="cta primary" href="/install?download=1" data-chrome-store>
+            <span class="cta-label">Download &amp; install</span>
+            <span class="cta-sub" data-chrome-status>Opens the install guide</span>
+          </a>
+        </div>
+        <ol class="install-strip" aria-label="Install overview">
           <li>
             <span class="step-num">01</span>
             <span class="step-title">Download</span>
-            <span class="step-body"
-              >Get
-              <a href="/filary-extension.zip" download="filary-extension.zip"
-                >filary-extension.zip</a
-              >
-              and unzip it. You should see a <code>filary</code> folder with
-              <code>manifest.json</code> inside.</span
-            >
+            <span class="step-body">Get the zip and unzip the filary folder.</span>
+            <div class="mini-visual" aria-hidden="true">
+              <div class="mini-zip">filary-extension.zip</div>
+            </div>
           </li>
           <li>
             <span class="step-num">02</span>
-            <span class="step-title">Open extensions</span>
+            <span class="step-title">Developer mode</span>
             <span class="step-body"
-              >Go to <code>chrome://extensions</code> and turn on
-              <strong>Developer mode</strong> (top right).</span
+              >Open chrome://extensions and turn the toggle on.</span
             >
+            <div class="mini-visual" aria-hidden="true">
+              <div class="mini-toggle"><i></i> On</div>
+            </div>
           </li>
           <li>
             <span class="step-num">03</span>
             <span class="step-title">Load unpacked</span>
             <span class="step-body"
-              >Click <strong>Load unpacked</strong> and select the unzipped
-              <code>filary</code> folder. Pin Filary from the puzzle icon.</span
+              >Select the filary folder. Pin it. Start filling.</span
             >
+            <div class="mini-visual" aria-hidden="true">
+              <div class="mini-folder">filary/</div>
+            </div>
           </li>
         </ol>
       </section>
@@ -210,6 +217,37 @@
             <span class="story-text"
               >Works against Filary’s Vercel API out of the box, or point the
               extension at your local generator.</span
+            >
+          </li>
+        </ul>
+      </section>
+
+      <section class="audience reveal">
+        <h2>Who Filary is for</h2>
+        <p class="section-lede">
+          Anyone who fills the same form ten times a day and still has to type
+          “Test User” again.
+        </p>
+        <ul class="audience-list">
+          <li>
+            <span class="audience-title">Developers</span>
+            <span class="audience-body"
+              >Smoke-test auth, onboarding, and checkout without seed scripts for
+              every click path.</span
+            >
+          </li>
+          <li>
+            <span class="audience-title">QA &amp; support</span>
+            <span class="audience-body"
+              >Reproduce tickets with coherent names, phones, and addresses that
+              match the locale.</span
+            >
+          </li>
+          <li>
+            <span class="audience-title">Product &amp; design</span>
+            <span class="audience-body"
+              >Walk stakeholders through real-looking flows instead of lorem
+              placeholders.</span
             >
           </li>
         </ul>
@@ -287,18 +325,28 @@
         </dl>
       </section>
 
+      <section class="privacy reveal">
+        <h2>What Filary sends</h2>
+        <p class="section-lede">
+          Only field names, types, and optional select options go to the
+          generator — never the page contents or passwords you already typed.
+          Values come back and fill that form alone.
+        </p>
+      </section>
+
       <section class="closing reveal">
         <p class="closing-brand">Filary</p>
         <h2>Stop typing fake users. Start filling forms.</h2>
         <p class="section-lede">
-          Install the extension, focus a field, and let Filary finish the form.
+          Download the zip, load it unpacked, focus a field — Filary finishes
+          the form.
         </p>
         <div class="cta-row">
-          <a class="cta primary" href="#add-to-chrome" data-chrome-store>
-            <span class="cta-label">Add to Chrome</span>
-            <span class="cta-sub" data-chrome-status>Link coming soon</span>
+          <a class="cta primary" href="/install?download=1" data-chrome-store>
+            <span class="cta-label">Download extension</span>
+            <span class="cta-sub" data-chrome-status>Zip · Install guide</span>
           </a>
-          <a class="cta ghost" href="#how">Back to how it works</a>
+          <a class="cta ghost" href="/install">Install instructions</a>
         </div>
       </section>
     </main>
@@ -311,10 +359,10 @@
         </p>
       </div>
       <div class="foot-links">
+        <a href="#install">Install</a>
         <a href="#how">How it works</a>
         <a href="#realism">Realism</a>
-        <a href="#control">Control</a>
-        <a href="#add-to-chrome" data-chrome-store>Add to Chrome</a>
+        <a href="/install?download=1" data-chrome-store>Download</a>
       </div>
     </footer>
 
