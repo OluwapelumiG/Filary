@@ -1,7 +1,8 @@
+import { HOSTED_API_BASE } from './config.js';
 import type { FilaryLocale, FilarySettings } from './types.js';
 
 export const DEFAULT_SETTINGS: FilarySettings = {
-  serverUrl: 'http://localhost:7002/api',
+  serverUrl: HOSTED_API_BASE,
   fillMode: 'empty',
   includePasswords: false,
   defaultPassword: '',

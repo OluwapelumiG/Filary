@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Filary — Realistic form fill for Chrome</title>
+    <meta
+      name="description"
+      content="Filary fills the focused form with realistic, locale-aware data. Built for Chrome."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <div class="atmosphere" aria-hidden="true">
+      <div class="glow glow-a"></div>
+      <div class="glow glow-b"></div>
+      <div class="glow glow-c"></div>
+      <div class="grid-wash"></div>
+    </div>
+
+    <header class="top">
+      <a class="mark" href="/" aria-label="Filary home">Filary</a>
+      <nav>
+        <a href="#how">How it works</a>
+        <a href="#realism">Realism</a>
+        <a href="#control">Control</a>
+        <a
+          id="nav-chrome"
+          class="nav-chrome"
+          href="#add-to-chrome"
+          data-chrome-store
+          >Add to Chrome</a
+        >
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="brand">Filary</p>
+          <h1>Fill the form in front of you with data that looks lived-in</h1>
+          <p class="lede">
+            Focus a field, trigger Filary, and every named control fills with
+            locale-aware names, phones, and addresses — from Filary’s hosted
+            API, ready wherever you work.
+          </p>
+          <div class="cta-row">
+            <a
+              id="add-to-chrome"
+              class="cta primary"
+              href="#add-to-chrome"
+              data-chrome-store
+            >
+              <span class="cta-label">Add to Chrome</span>
+              <span class="cta-sub" data-chrome-status>Link coming soon</span>
+            </a>
+            <a class="cta ghost" href="#how">See how it works</a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="form-plane">
+            <div class="form-plane-inner">
+              <div class="form-row">
+                <span class="label">Full name</span>
+                <span class="field" data-type="name">Adebola Okonkwo</span>
+              </div>
+              <div class="form-row">
+                <span class="label">Email</span>
+                <span class="field" data-type="email"
+                  >adebola.okonkwo@gmail.com</span
+                >
+              </div>
+              <div class="form-row">
+                <span class="label">Phone</span>
+                <span class="field" data-type="phone">+234 803 441 2291</span>
+              </div>
+              <div class="form-row split">
+                <div>
+                  <span class="label">City</span>
+                  <span class="field" data-type="city">Ikeja</span>
+                </div>
+                <div>
+                  <span class="label">State</span>
+                  <span class="field" data-type="state">Lagos</span>
+                </div>
+              </div>
+              <div class="form-row">
+                <span class="label">Country</span>
+                <span class="field" data-type="country">Nigeria</span>
+              </div>
+            </div>
+            <div class="shortcut-hint">
+              <kbd>⌘</kbd><kbd>⇧</kbd><kbd>Y</kbd>
+              <span>or</span>
+              <kbd>⌥</kbd><kbd>⇧</kbd><kbd>F</kbd>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="how" class="how reveal">
+        <h2>One focused form. One trigger. Done.</h2>
+        <p class="section-lede">
+          Filary finds the form you are in, reads field names and types, asks
+          the generator for values, and fills only that form — nothing else on
+          the page.
+        </p>
+        <ol class="steps">
+          <li>
+            <span class="step-num">01</span>
+            <span class="step-title">Focus a field</span>
+            <span class="step-body"
+              >Inside any standard HTML form. Named controls are what Filary
+              sees.</span
+            >
+          </li>
+          <li>
+            <span class="step-num">02</span>
+            <span class="step-title">Trigger Filary</span>
+            <span class="step-body"
+              >Toolbar popup, ⌘⇧Y / ⌥⇧F, or a shortcut you set in Chrome.</span
+            >
+          </li>
+          <li>
+            <span class="step-num">03</span>
+            <span class="step-title">Get real-looking data</span>
+            <span class="step-body"
+              >Locale, email domains, fill mode, and passwords — your
+              rules.</span
+            >
+          </li>
+        </ol>
+      </section>
+
+      <section class="story reveal">
+        <div class="story-copy">
+          <h2>Built for the forms you actually test</h2>
+          <p class="section-lede">
+            Fake data that looks fake slows everyone down. Filary generates
+            values that match the field — text, email, radio, checkbox — so
+            signup flows, checkout, and admin screens feel ready to ship.
+          </p>
+        </div>
+        <ul class="story-list">
+          <li>
+            <span class="story-label">Scoped fill</span>
+            <span class="story-text"
+              >Only the owning form is filled. Sibling forms and stray inputs
+              stay untouched.</span
+            >
+          </li>
+          <li>
+            <span class="story-label">Type-aware</span>
+            <span class="story-text"
+              >Field types travel with the request, so radios, checkboxes, and
+              text get values that fit.</span
+            >
+          </li>
+          <li>
+            <span class="story-label">Hosted API</span>
+            <span class="story-text"
+              >Works against Filary’s Vercel API out of the box, or point the
+              extension at your local generator.</span
+            >
+          </li>
+        </ul>
+      </section>
+
+      <section id="realism" class="realism reveal">
+        <div class="realism-copy">
+          <h2>Locale-aware, not Lorem Ipsum</h2>
+          <p class="section-lede">
+            Names, phones, cities, and states follow the locale you choose.
+            Country stays fixed per locale so the whole address reads as one
+            place.
+          </p>
+        </div>
+        <div class="locale-stage" aria-hidden="true">
+          <div class="locale-rail">
+            <span class="locale-tag is-active" data-locale-tag>en-NG</span>
+            <span class="locale-name" data-locale-name>Nigeria · English</span>
+          </div>
+          <div class="locale-grid">
+            <div>
+              <span class="label">Name</span>
+              <span class="locale-value" data-locale-field="name"
+                >Adebola Okonkwo</span
+              >
+            </div>
+            <div>
+              <span class="label">Phone</span>
+              <span class="locale-value" data-locale-field="phone"
+                >+234 803 441 2291</span
+              >
+            </div>
+            <div>
+              <span class="label">City</span>
+              <span class="locale-value" data-locale-field="city">Ikeja</span>
+            </div>
+            <div>
+              <span class="label">State</span>
+              <span class="locale-value" data-locale-field="state">Lagos</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="control" class="control reveal">
+        <h2>You set the rules</h2>
+        <p class="section-lede">
+          Defaults that get out of the way — and levers when you need them.
+        </p>
+        <dl class="control-list">
+          <div>
+            <dt>Fill mode</dt>
+            <dd>Empty fields only, or overwrite matched fields when retesting.</dd>
+          </div>
+          <div>
+            <dt>Locale</dt>
+            <dd>Start with Nigeria (English). Names and places stay coherent.</dd>
+          </div>
+          <div>
+            <dt>Email domains</dt>
+            <dd>gmail.com, yahoo.com, outlook.com — or your own list.</dd>
+          </div>
+          <div>
+            <dt>Passwords</dt>
+            <dd>Off by default. Opt in with a default password when you need it.</dd>
+          </div>
+          <div>
+            <dt>Server URL</dt>
+            <dd>Hosted Filary API, or localhost while you develop.</dd>
+          </div>
+          <div>
+            <dt>Shortcuts</dt>
+            <dd>⌘⇧Y and ⌥⇧F on macOS — edit anytime in Chrome’s shortcut panel.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="closing reveal">
+        <p class="closing-brand">Filary</p>
+        <h2>Stop typing fake users. Start filling forms.</h2>
+        <p class="section-lede">
+          Install the extension, focus a field, and let Filary finish the form.
+        </p>
+        <div class="cta-row">
+          <a class="cta primary" href="#add-to-chrome" data-chrome-store>
+            <span class="cta-label">Add to Chrome</span>
+            <span class="cta-sub" data-chrome-status>Link coming soon</span>
+          </a>
+          <a class="cta ghost" href="#how">Back to how it works</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="foot-main">
+        <p class="brand-foot">Filary</p>
+        <p class="muted">
+          Chrome extension · realistic form fill · hosted API
+        </p>
+      </div>
+      <div class="foot-links">
+        <a href="#how">How it works</a>
+        <a href="#realism">Realism</a>
+        <a href="#control">Control</a>
+        <a href="#add-to-chrome" data-chrome-store>Add to Chrome</a>
+      </div>
+    </footer>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

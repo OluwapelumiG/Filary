@@ -1,6 +1,6 @@
 # Filary
 
-Chrome extension that fills the **focused form** with realistic data from a local TypeServe-compatible server.
+Chrome extension that fills the **focused form** with realistic data from the Filary API (hosted on Vercel, or run locally).
 
 On trigger, Filary:
 
@@ -17,100 +17,98 @@ Controls without a `name` attribute are skipped.
 - [Bun](https://bun.sh) 1.1+
 - Google Chrome (or Chromium)
 
-## Setup
+## Deploy on Vercel (landing + API)
 
-### 1. Install and build
+One Vercel project serves:
+
+| Path | What |
+| ---- | ---- |
+| `/` | Landing page ([`web/`](web/)) |
+| `/api/*` | Generator API (serverless → [`api/[...path].ts`](api/[...path].ts) → [`server/src/app.ts`](server/src/app.ts)) |
+
+1. Push this repo and import it in [Vercel](https://vercel.com)
+2. Framework Preset: **Other**
+3. Install / build use [`vercel.json`](vercel.json) (`bun install`, output `web/`)
+4. Deploy
+
+After deploy, note your URL, e.g. `https://filary-xxxx.vercel.app`.
+
+5. Set the extension default API in [`extension/src/shared/config.ts`](extension/src/shared/config.ts):
+
+```ts
+export const HOSTED_API_BASE = 'https://YOUR_DEPLOYMENT.vercel.app/api';
+```
+
+6. `bun run build`, reload the unpacked extension (or ship the new build)
+
+Smoke-check the hosted API:
+
+```bash
+curl https://YOUR_DEPLOYMENT.vercel.app/api/health
+curl -X POST https://YOUR_DEPLOYMENT.vercel.app/api/generate \
+  -H 'Content-Type: application/json' \
+  -d '{"fields":[{"name":"firstName","type":"text"},{"name":"country","type":"text"}],"locale":"en-NG"}'
+```
+
+### Chrome Web Store button on the landing page
+
+In [`web/main.js`](web/main.js):
+
+```js
+const CHROME_STORE_URL = 'https://chromewebstore.google.com/detail/filary/…';
+```
+
+## Local development
 
 ```bash
 bun install
 bun run build
+bun run server          # API on http://localhost:7002/api
+bun run web             # landing on http://localhost:3000
 ```
 
-### 2. Start the local server
+In extension Settings, set Server URL to `http://localhost:7002/api` while developing against the local API.
 
-```bash
-bun run server
-```
-
-This starts the Filary sidecar at `http://localhost:7002/api`.
-
-| Endpoint | Purpose |
-| -------- | ------- |
-| `POST /api/generate` | **Primary.** Body: `{ fields: [{ name, type, options? }] }` → `{ values }` |
-| `GET /api/health` | Connection check for the popup / settings |
-| `GET /api/profile` | Debug sample profile (not used by fill) |
-
-Keep this process running while you use the extension.
-
-Stock TypeServe (fixed TypeScript routes only, no dynamic generate):
-
-```bash
-bun run --cwd server start:typeserve
-```
-
-### 3. Load the extension in Chrome
+## Load the extension in Chrome
 
 1. Open `chrome://extensions`
 2. Enable **Developer mode**
 3. Click **Load unpacked**
-4. Select the `extension/dist` folder inside this repo
+4. Select the `extension/dist` folder
 
-After code changes, run `bun run build` (or `bun run dev`) and click **Reload** on the extension card.
-
-### 4. Configure settings (optional)
-
-Open **Settings** from the Filary popup (or right-click the toolbar icon → Options):
+## Settings
 
 | Setting | Default | Notes |
 | ------- | ------- | ----- |
-| Server base URL | `http://localhost:7002/api` | Must match the running server |
-| Keyboard shortcuts | macOS: `⌘⇧Y` and `⌥⇧F` · others: `Ctrl+Shift+Y` and `Alt+Shift+F` | Both are registered; edit under `chrome://extensions/shortcuts` if needed |
-| Fill mode | Empty fields only | Or overwrite all matched named fields |
-| Include passwords | Off | When on, password inputs are filled; set an optional default password |
-| Locale | Nigeria (English) `en-NG` | Drives names, phone, city, state; country is fixed per locale |
-| Email domains | `gmail.com, yahoo.com, outlook.com` | Comma-separated; used for generated emails |
-
-Locale and email domains are sent with each `POST /generate` request.
+| Server base URL | Hosted Vercel `/api` (see `config.ts`) | Or `http://localhost:7002/api` for local |
+| Keyboard shortcuts | macOS: `⌘⇧Y` and `⌥⇧F` | Edit under `chrome://extensions/shortcuts` |
+| Fill mode | Empty fields only | Or overwrite matched fields |
+| Include passwords | Off | Optional default password |
+| Locale | Nigeria (English) `en-NG` | Names, phone, city, state; country fixed per locale |
+| Email domains | `gmail.com, yahoo.com, outlook.com` | Used for generated emails |
 
 ## Usage
 
-1. Ensure `bun run server` is running
-2. Open a page with a `<form>` (try [`demo/sample-form.html`](demo/sample-form.html) — open the file in Chrome)
-3. **Click / focus any field** inside the form
-4. Press **⌘⇧Y** or **⌥⇧F** on Mac (or use the Filary popup → **Fill focused form**)
-
-Filary collects every named field in that form, asks the server for values, and fills the form.
+1. Extension points at a running API (Vercel or `bun run server`)
+2. Open a page with a `<form>` (try [`demo/sample-form.html`](demo/sample-form.html))
+3. Focus a field, then **⌘⇧Y** / **⌥⇧F** or the popup
 
 ## How fill works
 
 ```
-Focus input → resolve <form> → collect name + type (+ select/radio options)
+Focus input → resolve <form> → collect name + type
     → POST /api/generate → { values by name } → fill that form only
-```
-
-- **Form resolution:** `element.form` → `closest('form')` → latest `<form>` preceding the input in document order
-- **Generation:** name + type heuristics, using your locale (default Nigeria) and email domain list
-- **Radio / select:** option values are sent to the server so responses can match real choices (e.g. `male` / `female`)
-
-## Development
-
-```bash
-# Rebuild extension on change
-bun run dev
-
-# Local generate API
-bun run server
 ```
 
 ## Project layout
 
 ```
-server/                 Local generate API (TypeServe-compatible sidecar)
-  src/filary-server.ts  Express entry (POST /generate)
-  src/generate.ts       Name + type → Faker values
-  typeserve.config.ts   Stock TypeServe config (optional)
-extension/              Chrome MV3 source → builds to extension/dist
+web/                    Landing page (Vercel static)
+api/                    Vercel serverless entry for /api/*
+server/                 Shared Express app (local + Vercel)
+extension/              Chrome MV3 → extension/dist
 demo/sample-form.html   Manual test form
+vercel.json             Static web + serverless API
 ```
 
 ## License

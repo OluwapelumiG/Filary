@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Filary",
-  "description": "Fill forms with realistic data from a local TypeServe server",
+  "description": "Fill forms with realistic, locale-aware data from Filary",
   "version": "1.0.0",
   "icons": {
     "16": "icons/icon16.png",
@@ -26,7 +26,11 @@
     "type": "module"
   },
   "permissions": ["storage", "activeTab", "scripting"],
-  "host_permissions": ["http://localhost/*", "http://127.0.0.1/*"],
+  "host_permissions": [
+    "http://localhost/*",
+    "http://127.0.0.1/*",
+    "https://*.vercel.app/*"
+  ],
   "commands": {
     "fill-form": {
       "suggested_key": {

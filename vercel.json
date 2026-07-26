@@ -1,0 +1,24 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "bun install",
+  "buildCommand": "echo 'Static web/ + serverless api/'",
+  "outputDirectory": "web",
+  "cleanUrls": true,
+  "functions": {
+    "api/[...path].ts": {
+      "memory": 1024,
+      "maxDuration": 15,
+      "includeFiles": "server/**"
+    }
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}

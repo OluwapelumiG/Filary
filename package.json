@@ -2,7 +2,7 @@
   "name": "filary",
   "private": true,
   "version": "1.0.0",
-  "description": "Chrome extension that fills forms with realistic data from a local TypeServe server",
+  "description": "Chrome extension that fills forms with realistic data from Filary API",
   "workspaces": [
     "server",
     "extension"
@@ -10,10 +10,22 @@
   "scripts": {
     "server": "bun run --cwd server start",
     "dev": "bun run --cwd extension dev",
-    "build": "bun run --cwd extension build"
+    "build": "bun run --cwd extension build",
+    "web": "bunx --bun serve web -l 3000",
+    "build:web": "echo 'web/ is static — nothing to build'"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.9.0",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@vercel/node": "^5.3.0",
+    "typescript": "^5.9.3"
   },
   "packageManager": "bun@1.2.23",
   "engines": {
-    "bun": ">=1.1.0"
+    "bun": ">=1.1.0",
+    "node": ">=18"
   }
 }
